@@ -90,7 +90,6 @@ function App() {
   /////////
   const playAudio = () => {
     const audio = new Audio(laughHaHa);
-    // setTimeout()
     audio.play();
   };
 
@@ -116,14 +115,30 @@ function App() {
     { cls: "btn btn-dot", label: "." },
     { cls: "btn btn-equals", label: "=" },
   ];
+  // generating random id for rendered component , button component
+  const generateRandomKey = () => {
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let key = "";
+
+    for (let i = 0; i < 10; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      key += characters[randomIndex];
+    }
+
+    return key;
+  };
+
   return (
     <div className="wrapper">
       <div className="calculator">
         <div className={isPrank ? "display prank" : "display"}>
           {strToDisplay || "0.00"}
         </div>
-        {btns.map((item, i) => {
-          return <Button key={i} {...item} func={handleOnClick} />;
+        {btns.map((item) => {
+          return (
+            <Button key={generateRandomKey()} {...item} func={handleOnClick} />
+          );
         })}
       </div>
     </div>
